@@ -24,6 +24,8 @@ const MovieDetails = () => {
      return;
    }
    if (errorMes) { return }
+
+   
    const getMovieDetails = async () => {
      try {
        const movieDetailsData = await fetchMovieDetails(movieId);

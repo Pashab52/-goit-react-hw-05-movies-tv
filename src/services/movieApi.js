@@ -52,9 +52,30 @@ return fetch(`https://api.themoviedb.org/3/movie/${movieId}`, options)
 
     return response.json()
   })
- 
-
 }
+
+
+export async function fetchTvDetails(movieId) {
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization:
+        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwOWY5NjI1ZWMwNTYzMDZhMTI5NDBmNzQyZDk4OTVlYiIsInN1YiI6IjY0YzQyMjQ3NDFhYWM0MDEwMTQzMTQ4NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.d_HEh-sV3F_dyKiODY0wef4bWi3WrlK7FGhBkulFBZ0',
+    },
+  };
+
+  return fetch(`https://api.themoviedb.org/3/tv/${movieId}`, options).then(
+    response => {
+      if (!response.ok) {
+        throw new Error(response.status);
+      }
+
+      return response.json();
+    }
+  );
+}
+
 
 
 

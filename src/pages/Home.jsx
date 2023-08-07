@@ -38,6 +38,7 @@ const Home = () => {
   useEffect(() => {
     const getTrendTv = async () => {
       const trendDataTv = await fetchTrendTv();
+      console.log(trendDataTv)
       const normTrendTv = normlazizeTrendDataTv(trendDataTv);
       setTrendsTv(normTrendTv);
     };
@@ -49,12 +50,15 @@ const Home = () => {
   }, []);
 
   function normlazizeTrendDataTv(trendDataTv) {
-    return trendDataTv.results.map(({ title, name, id, backdrop_path }) => ({
-      title,
-      name,
-      id,
-      backdrop_path,
-    }));
+    return trendDataTv.results.map(
+      ({ title, name, id, backdrop_path, media_type }) => ({
+        title,
+        name,
+        id,
+        backdrop_path,
+        media_type,
+      })
+    );
   }
 
 
@@ -72,17 +76,20 @@ const Home = () => {
               <h2 className="trend-title">Trending movies</h2>
               <ul className="list">
                 {trends &&
-                  trends.map(({ title, name, id, backdrop_path }) => {
-                    return (
-                      <TrendsItem
-                        key={id}
-                        title={title}
-                        name={name}
-                        id={id}
-                        backdrop_path={backdrop_path}
-                      />
-                    );
-                  })}
+                  trends.map(
+                    ({ title, name, id, backdrop_path, media_type }) => {
+                      return (
+                        <TrendsItem
+                          key={id}
+                          title={title}
+                          name={name}
+                          id={id}
+                          backdrop_path={backdrop_path}
+                          type={media_type}
+                        />
+                      );
+                    }
+                  )}
               </ul>
             </div>
 
